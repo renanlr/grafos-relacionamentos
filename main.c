@@ -7,11 +7,20 @@
 #include <string.h>
 #include <assert.h>
 
+//elemento da lista de adjacência
+typedef struct l {
+  struct l * prox;
+  struct g * amigo;
+} amigo;
+
+//vértice do grafo
 typedef struct g {
     char *nome;
     char *matricula;
-    void *amigos;
+    amigo *amigos;
 } aluno;
+
+
 
 aluno grafo_alunos[39];
 int preencherGrafo();
@@ -57,10 +66,12 @@ int preencherGrafo() {
     char **tokens;
     int i,j=0;
 
+    //abre-se o arquivo
     fp = fopen("amigos_tag20171.txt", "r");
     if (fp == NULL) {
         return -1;
     }
+
 
     while ((read = getline(&line, &len, fp)) != -1) {
         printf("Retrieved line of length %zu :\n", read);
