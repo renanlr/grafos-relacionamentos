@@ -1,3 +1,7 @@
+/*
+@jeffvfa
+@renanlr
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,35 +16,38 @@ typedef struct g {
 aluno grafo_alunos[39];
 int preencherGrafo();
 char **str_split(char *, const char);
+void menu();
 
-int main() {
-    int escape = 1, opt;
-    preencherGrafo();
-    do {
-        printf("\t====================================================\n");
-        printf("\t======================= Menu =======================\n");
-        printf("\t====================================================\n");
-        printf("\t========== 1) Imprimir em ordem de grau  ===========\n");
-        printf("\t========== 2) Imprimir todos os vertices ===========\n");
-        printf("\t========== 3) Sair                       ===========\n");
-        printf("\t====================================================\n");
-        printf("\t====================================================\n");
-        printf("\t====================================================\n\t>>>");
-        scanf("%d", &opt);
-        switch (opt) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                escape = 0;
-                break;
-            default:
-                break;
-        }
-    } while (escape);
-    return 0;
+
+void menu(){
+  int escape = 1, opt;
+
+  do {
+      printf("\t====================================================\n");
+      printf("\t======================= Menu =======================\n");
+      printf("\t====================================================\n");
+      printf("\t========== 1) Imprimir em ordem de grau  ===========\n");
+      printf("\t========== 2) Imprimir todos os vertices ===========\n");
+      printf("\t========== 3) Sair                       ===========\n");
+      printf("\t====================================================\n");
+      printf("\t====================================================\n");
+      printf("\t====================================================\n\t>>>");
+      scanf("%d", &opt);
+      switch (opt) {
+          case 1:
+              break;
+          case 2:
+              break;
+          case 3:
+              escape = 0;
+              break;
+          default:
+              break;
+      }
+  } while (escape);
 }
+
+
 
 int preencherGrafo() {
     FILE *fp;
@@ -123,4 +130,13 @@ char **str_split(char *a_str, const char a_delim) {
     }
 
     return result;
+}
+
+int main() {
+    int escape = 1, opt;
+    preencherGrafo();
+
+    menu();
+
+    return 0;
 }
