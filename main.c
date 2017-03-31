@@ -67,10 +67,11 @@ int preencherGrafo() {
             //inserindo matricula do aluno
             grafo_alunos[j].matricula = *(tokens + 1);
             printf("Matricula=%s\n",grafo_alunos[j].matricula);
-            // /inserindo matricula de amigos
+            //inserindo matricula de amigos
             for (i = 2; *(tokens + i); i++) {
                 printf(" %s - ", *(tokens + i));
                 free(*(tokens + i));
+
             }
             printf("\n");
             free(tokens);
