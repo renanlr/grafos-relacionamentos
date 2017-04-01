@@ -30,36 +30,24 @@ aluno grafo_alunos[NV];
 //protótipos de funções
 int preencherGrafo();
 
+void strip(char *);
+
 char **str_split(char *, const char);
 
 void menu();
 
 aluno *buscaVertice(char *);
 
-void novaAresta(amigo *, aluno *, char *);
-
-int numAmigos(amigo *);
-
 int contaMaxAmigos();
 
 aluno *maisAmigos();
-
-
-//conta quantos amigos um usuário possui
-int numAmigos(amigo *lista) {
-    if (lista == NULL) {
-        return 0;
-    } else {
-        return numAmigos(lista->prox) + 1;
-    }
-}
 
 aluno *maisAmigos() {
     int i,maisAmigos = 0;
     aluno *aluno = NULL;
     for (i = 0; i < NV; i++) {
-        maisAmigos = numAmigos(grafo_alunos[i].amigos) > maisAmigos ? numAmigos(grafo_alunos[i].amigos) : maisAmigos;
-        aluno = numAmigos(grafo_alunos[i].amigos) > maisAmigos ? &grafo_alunos[i] : aluno;
+        maisAmigos = grafo_alunos[i].numAmigos > maisAmigos ? grafo_alunos[i].numAmigos : maisAmigos;
+        aluno = grafo_alunos[i].numAmigos > maisAmigos ? &grafo_alunos[i] : aluno;
     }
     return aluno;
 }
@@ -68,7 +56,7 @@ aluno *maisAmigos() {
 int contaMaxAmigos() {
     int i,maisAmigos = 0;
     for (i = 0; i < NV; i++) {
-        maisAmigos = numAmigos(grafo_alunos[i].amigos) > maisAmigos ? numAmigos(grafo_alunos[i].amigos) : maisAmigos;
+        maisAmigos = (grafo_alunos[i].numAmigos) > maisAmigos ? grafo_alunos[i].numAmigos : maisAmigos;
     }
     return maisAmigos;
 }
@@ -89,21 +77,6 @@ aluno *buscaVertice(char *target) {
     //se não retorna um ponteiro nulo
     //printf("não achou\n");
     return retorno;
-}
-
-//inserção no começo da lista
-void novaAresta(amigo *lista, aluno *amigo, char *matricula) {
-    struct amg novo;
-    novo.amigo = (aluno *) &amigo;
-    novo.prox = NULL;
-    novo.matricula = matricula;
-
-    if (lista == NULL) {
-        lista = &novo;
-    } else {
-        novo.prox = (struct amg *) & lista;
-        lista = &novo;
-    }
 }
 
 //invoca o menu
@@ -156,8 +129,7 @@ int preencherGrafo() {
         printf("%d--------------------------------------\n",j);
         printf("Retrieved line of length %zu :\n", read);
         printf("%s", line);
-        printf("----------------------------------------\n");
-
+        strip(line);
         // Separando linha por virgulas
         tokens = str_split(line, ',');
         if (tokens) {
@@ -165,10 +137,11 @@ int preencherGrafo() {
             grafo_alunos[j].amigos = NULL;
             //inserindo nome do aluno no grafo
             grafo_alunos[j].nome = *(tokens);
-            printf("Nome=%s\n", grafo_alunos[j].nome);
+            printf("Nome => %s\n", grafo_alunos[j].nome);
             //inserindo matricula do aluno
             grafo_alunos[j].matricula = *(tokens + 1);
-            printf("Matricula=%s\n", grafo_alunos[j].matricula);
+            printf("Matricula => %s\n", grafo_alunos[j].matricula);
+            printf("Amigos => ");
 
             // inserindo matricula de amigos
 
@@ -186,15 +159,16 @@ int preencherGrafo() {
                 //novaAresta(grafo_alunos[j].amigos, alvo, *(tokens + i));
                 ultimoDaLista->matricula = *(tokens+i);
                 ultimoDaLista->prox = malloc(sizeof(amigo));
-                printf(" %s - ", ultimoDaLista->matricula);
+                printf("%s ", ultimoDaLista->matricula);
                 ultimoDaLista = ultimoDaLista->prox;
 
             }
             free(ultimoDaLista);
 
-            grafo_alunos[j].numAmigos = i-1;
+            grafo_alunos[j].numAmigos = i-2;
+            printf("\nNum_Amigos => %d\n",grafo_alunos[j].numAmigos);
 
-            printf("\n");
+        printf("\n");
         }
         j++;
     }
@@ -202,7 +176,17 @@ int preencherGrafo() {
     return 0;
 }
 
-
+void strip(char *s) {
+    char *p2 = s;
+    while(*s != '\0') {
+        if(*s != '\t' && *s != '\n') {
+            *p2++ = *s++;
+        } else {
+            ++s;
+        }
+    }
+    *p2 = '\0';
+}
 
 char **str_split(char *a_str, const char a_delim) {
     char **result = 0;
