@@ -34,6 +34,7 @@ aluno * buscaVertice(char *);
 void novaAresta(amigo*, aluno *, char *);
 int numAmigos(amigo*);
 int contaMaxAmigos();
+aluno * maisAmigos();
 
 
 //conta quantos amigos um usuário possui
@@ -46,7 +47,17 @@ int numAmigos(amigo * lista){
   }
 }
 
-//retorna quem possui mais amigos
+aluno * maisAmigos(){
+  int maisAmigos = 0;
+  aluno * aluno = NULL;
+  for (int i = 0; i < NV; i++) {
+    maisAmigos = numAmigos(grafo_alunos[i].amigos) > maisAmigos? numAmigos(grafo_alunos[i].amigos) : maisAmigos;
+    aluno = numAmigos(grafo_alunos[i].amigos) > maisAmigos? &grafo_alunos[i] : aluno;
+  }
+  return aluno;
+}
+
+//retorna a maior quantidade de amigos
 int contaMaxAmigos(){
   int maisAmigos = 0;
   for (int i = 0; i < NV; i++) {
