@@ -43,7 +43,7 @@ int contaMaxAmigos();
 aluno *maisAmigos();
 
 aluno *maisAmigos() {
-    int i,maisAmigos = 0;
+    int i, maisAmigos = 0;
     aluno *aluno = NULL;
     for (i = 0; i < NV; i++) {
         maisAmigos = grafo_alunos[i].numAmigos > maisAmigos ? grafo_alunos[i].numAmigos : maisAmigos;
@@ -54,7 +54,7 @@ aluno *maisAmigos() {
 
 //retorna a maior quantidade de amigos
 int contaMaxAmigos() {
-    int i,maisAmigos = 0;
+    int i, maisAmigos = 0;
     for (i = 0; i < NV; i++) {
         maisAmigos = (grafo_alunos[i].numAmigos) > maisAmigos ? grafo_alunos[i].numAmigos : maisAmigos;
     }
@@ -126,7 +126,7 @@ int preencherGrafo() {
 
 
     while ((read = getline(&line, &len, fp)) != -1) {
-        printf("%d--------------------------------------\n",j);
+        printf("%d--------------------------------------\n", j);
         printf("Retrieved line of length %zu :\n", read);
         printf("%s", line);
         strip(line);
@@ -149,7 +149,7 @@ int preencherGrafo() {
             a ideia aqui está certa, porém temos que fazer 2 passadas, pois podemos
             querer referenciar algúem que não está no vetor ainda
             */
-            amigo * ultimoDaLista;
+            amigo *ultimoDaLista;
             grafo_alunos[j].amigos = malloc(sizeof(amigo));
             ultimoDaLista = grafo_alunos[j].amigos;
             for (i = 2; *(tokens + i); i++) {
@@ -157,7 +157,7 @@ int preencherGrafo() {
                 //alvo = buscaVertice(*(tokens + i));
 
                 //novaAresta(grafo_alunos[j].amigos, alvo, *(tokens + i));
-                ultimoDaLista->matricula = *(tokens+i);
+                ultimoDaLista->matricula = *(tokens + i);
                 ultimoDaLista->prox = malloc(sizeof(amigo));
                 printf("%s ", ultimoDaLista->matricula);
                 ultimoDaLista = ultimoDaLista->prox;
@@ -165,10 +165,10 @@ int preencherGrafo() {
             }
             free(ultimoDaLista);
 
-            grafo_alunos[j].numAmigos = i-2;
-            printf("\nNum_Amigos => %d\n",grafo_alunos[j].numAmigos);
+            grafo_alunos[j].numAmigos = i - 2;
+            printf("\nNum_Amigos => %d\n", grafo_alunos[j].numAmigos);
 
-        printf("\n");
+            printf("\n");
         }
         j++;
     }
@@ -178,8 +178,8 @@ int preencherGrafo() {
 
 void strip(char *s) {
     char *p2 = s;
-    while(*s != '\0') {
-        if(*s != '\t' && *s != '\n') {
+    while (*s != '\0') {
+        if (*s != '\t' && *s != '\n') {
             *p2++ = *s++;
         } else {
             ++s;
