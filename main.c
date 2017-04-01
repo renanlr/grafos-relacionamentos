@@ -12,6 +12,7 @@
 typedef struct l {
   struct l * prox;
   struct g * amigo;
+  char *matricula;
 } amigo;
 
 //vértice do grafo
@@ -29,8 +30,9 @@ aluno grafo_alunos[NV];
 int preencherGrafo();
 char **str_split(char *, const char);
 void menu();
-int novoElementoLista();
-struct g * buscaVertice(char *);
+aluno * buscaVertice(char *);
+void novaAresta(amigo*, aluno *, char *);
+
 
 //função que busca um vértice através de sua matrícula
 aluno * buscaVertice(char * target){
@@ -49,6 +51,21 @@ aluno * buscaVertice(char * target){
   return retorno;
 }
 
+void novaAresta(amigo * lista, aluno * amigo, char *matricula){
+  struct l novo;
+  novo.amigo = (aluno*) &amigo;
+  novo.matricula = matricula;
+
+  if (lista == NULL) {
+    lista = &novo;
+  }
+  else{
+    novo.prox = (struct l *) &lista;
+    lista = &novo;
+  }
+}
+
+//invoca o menu
 void menu(){
   int escape = 1, opt;
 
@@ -100,6 +117,8 @@ int preencherGrafo() {
         tokens = str_split(line, ',');
 
         if (tokens) {
+            //inicializando a lista de amigos como uma lista vazia
+            grafo_alunos[j].amigos = NULL;
             //inserindo nome do aluno no grafo
             grafo_alunos[j].nome = *(tokens);
             printf("Nome=%s\n",grafo_alunos[j].nome);
