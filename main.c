@@ -19,6 +19,7 @@ typedef struct l {
 typedef struct g {
     char *nome;
     char *matricula;
+    int numAmigos;
     amigo *amigos;
 } aluno;
 
@@ -175,7 +176,11 @@ int preencherGrafo() {
                 printf(" %s - ", *(tokens + i));
                 free(*(tokens + i));
             }
+
+            grafo_alunos[j].numAmigos = numAmigos(&(grafo_alunos[j].amigos));
+
             printf("\n");
+
             free(tokens);
         }
         j++;
