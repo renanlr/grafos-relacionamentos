@@ -37,13 +37,15 @@ aluno * buscaVertice(char * target){
   aluno *retorno = NULL;
   //varre a lista
   for (int i = 0; i < NV; i++) {
-    if (strcmp((grafo_alunos[i].matricula), target)){
+    if (strcmp((grafo_alunos[i].matricula), target) == 0){
       retorno = &grafo_alunos[i];
       //se encontra o vértice retorna o endereço do vértice
+      //printf("achou\n");
       return retorno;
     }
   }
   //se não retorna um ponteiro nulo
+  //printf("não achou\n");
   return retorno;
 }
 
@@ -164,7 +166,8 @@ char **str_split(char *a_str, const char a_delim) {
 int main() {
     int escape = 1, opt;
     preencherGrafo();
-
+    //buscaVertice("kiko");
+    //buscaVertice("130028959");
     menu();
 
     return 0;
