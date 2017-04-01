@@ -51,9 +51,11 @@ aluno * buscaVertice(char * target){
   return retorno;
 }
 
+//inserção no começo da lista
 void novaAresta(amigo * lista, aluno * amigo, char *matricula){
   struct l novo;
   novo.amigo = (aluno*) &amigo;
+  novo.prox = NULL;
   novo.matricula = matricula;
 
   if (lista == NULL) {
@@ -103,6 +105,7 @@ int preencherGrafo() {
     ssize_t read;
     char **tokens;
     int i,j=0;
+    aluno * alvo;
 
     //abre-se o arquivo
     fp = fopen("amigos_tag20171.txt", "r");
@@ -126,7 +129,17 @@ int preencherGrafo() {
             grafo_alunos[j].matricula = *(tokens + 1);
             printf("Matricula=%s\n",grafo_alunos[j].matricula);
             // /inserindo matricula de amigos
+
+            /*
+            a ideia aqui está certa, porém temos que fazer 2 passadas, pois podemos
+            querer referenciar algúem que não está no vetor ainda
+            */
             for (i = 2; *(tokens + i); i++) {
+
+                alvo = buscaVertice(*(tokens + i));
+
+                novaAresta(grafo_alunos[j].amigos, alvo, *(tokens + i));
+
                 printf(" %s - ", *(tokens + i));
                 free(*(tokens + i));
             }
