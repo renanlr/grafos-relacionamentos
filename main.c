@@ -32,6 +32,18 @@ char **str_split(char *, const char);
 void menu();
 aluno * buscaVertice(char *);
 void novaAresta(amigo*, aluno *, char *);
+int numAmigos(amigo*);
+
+
+//conta quantos amigos um usuário possui
+int numAmigos(amigo * lista){
+  if (lista == NULL) {
+    return 0;
+  }
+  else {
+    return numAmigos(lista->prox) + 1;
+  }
+}
 
 
 //função que busca um vértice através de sua matrícula
