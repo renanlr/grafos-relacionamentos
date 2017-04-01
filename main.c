@@ -6,8 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#define NV 39
 
-//elemento da lista de adjacência
+//elemento da lista de adjacência, aresta
 typedef struct l {
   struct l * prox;
   struct g * amigo;
@@ -22,11 +23,29 @@ typedef struct g {
 
 
 
-aluno grafo_alunos[39];
+aluno grafo_alunos[NV];
+
+//protótipos de funções
 int preencherGrafo();
 char **str_split(char *, const char);
 void menu();
+int novoElementoLista();
+struct g * buscaVertice(char *);
 
+//função que busca um vértice através de sua matrícula
+aluno * buscaVertice(char * target){
+  aluno *retorno = NULL;
+  //varre a lista
+  for (int i = 0; i < NV; i++) {
+    if (strcmp((grafo_alunos[i].matricula), target)){
+      retorno = &grafo_alunos[i];
+      //se encontra o vértice retorna o endereço do vértice
+      return retorno;
+    }
+  }
+  //se não retorna um ponteiro nulo
+  return retorno;
+}
 
 void menu(){
   int escape = 1, opt;
