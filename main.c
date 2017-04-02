@@ -34,6 +34,8 @@ void strip(char *);
 
 void ligarAmigos();
 
+void imprimirPorGrau();
+
 char **str_split(char *, const char);
 
 void menu();
@@ -84,18 +86,20 @@ void menu() {
     int escape = 1, opt;
 
     do {
+        system("clear||cls");
         printf("\t====================================================\n");
         printf("\t======================= Menu =======================\n");
         printf("\t====================================================\n");
-        printf("\t========== 1) Imprimir em ordem de grau  ===========\n");
-        printf("\t========== 2) Imprimir todos os vertices ===========\n");
-        printf("\t========== 3) Sair                       ===========\n");
+        printf("\t========= 1) Imprimir em ordem de grau    ==========\n");
+        printf("\t========= 2) Imprimir em ordem de cliques ==========\n");
+        printf("\t========= 3) Sair                         ==========\n");
         printf("\t====================================================\n");
         printf("\t====================================================\n");
         printf("\t====================================================\n\t>>>");
         scanf("%d", &opt);
         switch (opt) {
             case 1:
+                imprimirPorGrau();
                 break;
             case 2:
                 break;
@@ -106,6 +110,41 @@ void menu() {
                 break;
         }
     } while (escape);
+}
+
+void imprimirPorGrau() {
+    int i = 0, j = 0, k = 0, l = 0;
+    aluno grafo_alunos_ordenado[NV];
+    aluno temp, aux;
+    grafo_alunos_ordenado[0] = grafo_alunos[0];
+    ++k;
+    for (i = 1; i < NV; ++i) {
+        for (j = 0; j < k; ++j) {
+            if (grafo_alunos[i].numAmigos >= grafo_alunos_ordenado[j].numAmigos) {
+                ++k;
+                temp = grafo_alunos_ordenado[j];
+                grafo_alunos_ordenado[j] = grafo_alunos[i];
+                for (l = j + 1; l < k; ++l) {
+                    aux = grafo_alunos_ordenado[l];
+                    grafo_alunos_ordenado[l] = temp;
+                    temp = aux;
+                }
+                break;
+            } else if (j == (k - 1)) {
+                grafo_alunos_ordenado[j + 1] = grafo_alunos[i];
+                ++k;
+                break;
+            }
+        }
+    }
+    system("clear||cls");
+    for (i = 0; i < NV; ++i) {
+        printf("\t%s %s %d amigos\n", grafo_alunos_ordenado[i].matricula, grafo_alunos_ordenado[i].nome,
+               grafo_alunos_ordenado[i].numAmigos);
+    }
+    printf("\n\tPressione uma tecla para voltar ao menu\n");
+    getchar();
+    getchar();
 }
 
 
