@@ -32,6 +32,8 @@ int preencherGrafo();
 
 void strip(char *);
 
+void ligarAmigos();
+
 char **str_split(char *, const char);
 
 void menu();
@@ -68,14 +70,12 @@ aluno *buscaVertice(char *target) {
     int i;
     for (i = 0; i < NV; i++) {
         if (strcmp((grafo_alunos[i].matricula), target) == 0) {
-            retorno = &grafo_alunos[i];
             //se encontra o vértice retorna o endereço do vértice
-            //printf("achou\n");
+            retorno = &grafo_alunos[i];
             return retorno;
         }
     }
     //se não retorna um ponteiro nulo
-    //printf("não achou\n");
     return retorno;
 }
 
@@ -163,7 +163,6 @@ int preencherGrafo() {
                 ultimoDaLista = ultimoDaLista->prox;
 
             }
-            free(ultimoDaLista);
 
             grafo_alunos[j].numAmigos = i - 2;
             printf("\nNum_Amigos => %d\n", grafo_alunos[j].numAmigos);
@@ -173,7 +172,24 @@ int preencherGrafo() {
         j++;
     }
     fclose(fp);
+    ligarAmigos();
     return 0;
+}
+
+// Este método deve relacionar a lista de amigos com o seu respectivo nó
+void ligarAmigos() {
+    int k;
+    amigo *elementoLista;
+    for (k = 0; k < NV; k++) {
+        printf("entrei no for, k=%d\n", k);
+        elementoLista = grafo_alunos[k].amigos;
+        while (elementoLista->matricula != NULL) {
+            printf("entrei no while matricula = %s\n", elementoLista->matricula);
+            elementoLista->amigo = buscaVertice(elementoLista->matricula);
+            elementoLista = elementoLista->prox;
+        }
+        printf("sai do null\n");
+    }
 }
 
 void strip(char *s) {
@@ -233,8 +249,6 @@ char **str_split(char *a_str, const char a_delim) {
 
 int main() {
     preencherGrafo();
-    //buscaVertice("kiko");
-    //buscaVertice("130028959");
     menu();
 
     return 0;
