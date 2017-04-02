@@ -165,9 +165,6 @@ int preencherGrafo() {
 
 
     while ((read = getline(&line, &len, fp)) != -1) {
-        printf("%d--------------------------------------\n", j);
-        printf("Retrieved line of length %zu :\n", read);
-        printf("%s", line);
         strip(line);
         // Separando linha por virgulas
         tokens = str_split(line, ',');
@@ -176,11 +173,8 @@ int preencherGrafo() {
             grafo_alunos[j].amigos = NULL;
             //inserindo nome do aluno no grafo
             grafo_alunos[j].nome = *(tokens);
-            printf("Nome => %s\n", grafo_alunos[j].nome);
             //inserindo matricula do aluno
             grafo_alunos[j].matricula = *(tokens + 1);
-            printf("Matricula => %s\n", grafo_alunos[j].matricula);
-            printf("Amigos => ");
 
             // inserindo matricula de amigos
 
@@ -198,13 +192,11 @@ int preencherGrafo() {
                 //novaAresta(grafo_alunos[j].amigos, alvo, *(tokens + i));
                 ultimoDaLista->matricula = *(tokens + i);
                 ultimoDaLista->prox = malloc(sizeof(amigo));
-                printf("%s ", ultimoDaLista->matricula);
                 ultimoDaLista = ultimoDaLista->prox;
 
             }
 
             grafo_alunos[j].numAmigos = i - 2;
-            printf("\nNum_Amigos => %d\n", grafo_alunos[j].numAmigos);
 
             printf("\n");
         }
