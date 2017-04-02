@@ -181,14 +181,11 @@ void ligarAmigos() {
     int k;
     amigo *elementoLista;
     for (k = 0; k < NV; k++) {
-        printf("entrei no for, k=%d\n", k);
         elementoLista = grafo_alunos[k].amigos;
         while (elementoLista->matricula != NULL) {
-            printf("entrei no while matricula = %s\n", elementoLista->matricula);
             elementoLista->amigo = buscaVertice(elementoLista->matricula);
             elementoLista = elementoLista->prox;
         }
-        printf("sai do null\n");
     }
 }
 
