@@ -99,11 +99,14 @@ void menu() {
         scanf("%d", &opt);
         switch (opt) {
             case 1:
+                system("clear||cls");
                 imprimirPorGrau();
                 break;
             case 2:
+                system("clear||cls");
                 break;
             case 3:
+                system("clear||cls");
                 escape = 0;
                 break;
             default:
@@ -137,7 +140,6 @@ void imprimirPorGrau() {
             }
         }
     }
-    system("clear||cls");
     for (i = 0; i < NV; ++i) {
         printf("\t%s %s %d amigos\n", grafo_alunos_ordenado[i].matricula, grafo_alunos_ordenado[i].nome,
                grafo_alunos_ordenado[i].numAmigos);
