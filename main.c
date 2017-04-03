@@ -46,7 +46,29 @@ int contaMaxAmigos();
 
 aluno *maisAmigos();
 
-void maiorClique();
+int maiorClique();
+
+int achaCLique(aluno); 
+
+int eAmigo(aluno, aluno);
+
+//
+/*
+int eAmigo(aluno alvo, aluno duvida){ 
+	if(strcmp(alvo.matricula, duvida.matricula) == 0){ 
+		return 0; 	
+	} 
+	else if ()	
+}*/
+
+/*int maiorClique(aluno * noinicio){ 
+	int cliqueMaior = 0, parcial; 
+	for(int i = 0; i < NV; i++){ 
+		parcial = achaCLique(grafo_alunos[1]);
+		parcial > cliqueMaior? parcial : cliqueMaior;
+	} 
+	return cliqueMaior;
+} */
 
 aluno *maisAmigos() {
     int i, maisAmigos = 0;
@@ -93,7 +115,7 @@ void menu() {
         printf("\t======================= Menu =======================\n");
         printf("\t====================================================\n");
         printf("\t========= 1) Imprimir em ordem de grau    ==========\n");
-        printf("\t========= 2) Imprimir em ordem de cliques ==========\n");
+        printf("\t========= 2) Imprimir o maior clique      ==========\n");
         printf("\t========= 3) Sair                         ==========\n");
         printf("\t====================================================\n");
         printf("\t====================================================\n");
@@ -289,4 +311,6 @@ int main() {
     menu();
 
     return 0;
-}
+} 
+
+
