@@ -48,18 +48,27 @@ aluno *maisAmigos();
 
 int maiorClique();
 
-int achaCLique(aluno);
+int achaCLique(aluno); 
+
+int eAmigo(aluno, aluno);
 
 //
+/*
+int eAmigo(aluno alvo, aluno duvida){ 
+	if(strcmp(alvo.matricula, duvida.matricula) == 0){ 
+		return 0; 	
+	} 
+	else if ()	
+}*/
 
-int maiorClique(aluno * noinicio){ 
+/*int maiorClique(aluno * noinicio){ 
 	int cliqueMaior = 0, parcial; 
 	for(int i = 0; i < NV; i++){ 
 		parcial = achaCLique(grafo_alunos[1]);
 		parcial > cliqueMaior? parcial : cliqueMaior;
 	} 
 	return cliqueMaior;
-} 
+} */
 
 aluno *maisAmigos() {
     int i, maisAmigos = 0;
