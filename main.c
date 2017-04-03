@@ -46,6 +46,8 @@ int contaMaxAmigos();
 
 aluno *maisAmigos();
 
+void maiorClique();
+
 aluno *maisAmigos() {
     int i, maisAmigos = 0;
     aluno *aluno = NULL;
@@ -104,6 +106,7 @@ void menu() {
                 break;
             case 2:
                 system("clear||cls");
+                maiorClique();
                 break;
             case 3:
                 system("clear||cls");
@@ -113,6 +116,10 @@ void menu() {
                 break;
         }
     } while (escape);
+}
+
+void maiorClique(){
+    printf("Cliquezão");
 }
 
 void imprimirPorGrau() {
