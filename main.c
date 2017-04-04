@@ -46,29 +46,59 @@ int contaMaxAmigos();
 
 aluno *maisAmigos();
 
-int maiorClique();
+aluno * bronKerbosch (aluno*,aluno*,aluno*);
 
-int achaCLique(aluno); 
+void maiorClique();
 
-int eAmigo(aluno, aluno);
+aluno * vizinhos(aluno *);
 
-//
-/*
-int eAmigo(aluno alvo, aluno duvida){ 
-	if(strcmp(alvo.matricula, duvida.matricula) == 0){ 
-		return 0; 	
-	} 
-	else if ()	
-}*/
+aluno * uniao(aluno *,aluno *);
 
-/*int maiorClique(aluno * noinicio){ 
-	int cliqueMaior = 0, parcial; 
-	for(int i = 0; i < NV; i++){ 
-		parcial = achaCLique(grafo_alunos[1]);
-		parcial > cliqueMaior? parcial : cliqueMaior;
-	} 
-	return cliqueMaior;
-} */
+aluno * interseccao(aluno*,aluno*);
+
+aluno * uniao(aluno * A, aluno *B){
+
+
+}
+
+aluno * vizinhos(aluno * inicio){
+  aluno vizinhos[NV];
+  amigo * pindice;
+  int i = 0;
+  pindice = inicio->amigos;
+
+  while (pindice != NULL) {
+    vizinhos[i] =  pindice.amigo;
+    pindice = pindice.prox;
+    i++;
+  }
+
+  return vizinhos;
+}
+
+
+aluno * bronKerbosch (aluno * R, aluno* P, aluno* X){
+  aluno *paux, *xaux,*raux,*vizi;
+  int i;
+
+  if ((X == P) == NULL) {
+    return R;
+  }
+
+  for (i = 0; i < NV; i++) {
+    vizi = vizinhos(grafo_alunos[i]);
+    raux = uniao(R,grafo_alunos[i]);
+    paux = interseccao(vizi,P);
+    xaux = interseccao(vizi,X);
+
+    bronKerbosch(&raux,&paux,&xaux);
+
+    P = remove(grafo_alunos[i], P);
+    X = uniao(X,grafo_alunos[i]);
+  }
+
+
+}
 
 aluno *maisAmigos() {
     int i, maisAmigos = 0;
@@ -311,6 +341,4 @@ int main() {
     menu();
 
     return 0;
-} 
-
-
+}
